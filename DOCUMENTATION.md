@@ -396,7 +396,7 @@ TSLA: 12.44%  ← Speculative component
    - Optimal portfolio Sharpe (1.115) > Best individual asset Sharpe (1.103)
    - Better risk-adjusted performance than any single asset
 
-2. **Surprising Optimal Allocation:**:
+2. **Surprising Optimal Allocation:**
    - Heavy concentration in AAPL (85%) despite moderate individual Sharpe
    - Complete exclusion of NVDA despite best individual performance
    - Significant TSLA allocation (12%) despite poor individual Sharpe
@@ -405,7 +405,7 @@ TSLA: 12.44%  ← Speculative component
    - NVDA's high correlations with other assets reduce its diversification benefit
    - AAPL provides the best balance of return and diversification benefits
 
-4. **Portfolio Math ≠ Individual Performance:**:
+4. **Portfolio Math ≠ Individual Performance:**
    - Assets with good individual stats don't always make good portfolio components
    - Correlation structure dramatically impacts optimal weights
 
