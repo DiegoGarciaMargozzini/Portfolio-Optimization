@@ -36,8 +36,8 @@ log_returns = np.log(prices / prices.shift(1)).dropna()
 
 ### Key Metrics
 - **Assets analyzed**: SPY (S&P 500), AAPL (Apple), NVDA (NVIDIA), TSLA (Tesla)
-- **Time period**: ~4+ years of daily data
-- **Data points**: ~1,200+ trading days per asset
+- **Time period**:  2020-01-01 to 2025-11-17
+- **Data points**: Extensive daily trading data
 
 ### Why log returns?
 Log returns are:
@@ -77,6 +77,8 @@ This graph **normalizes all prices to start at 100** on day 1, making it easy to
 | AAPL  | ~400                 | +300%        |
 | SPY   | ~300                 | +200%        |
 
+
+
 **Key Insight**: NVDA had explosive growth, but was it worth the risk? That's what we analyze next.
 
 ---
@@ -110,14 +112,14 @@ Sharpe = (Annual Return) / (Annual Volatility)
 ### Example Results:
 | Asset | Annual Return | Annual Volatility | Sharpe Ratio | Rating |
 |-------|--------------|-------------------|--------------|---------|
-| NVDA  | 58.73%       | 53.25%            | 1.10         | ⭐⭐⭐|
-| AAPL  | 22.28%       | 32.01%            | 0.70         | ⭐⭐  |
+| NVDA  | 58.73%       | 53.25%            | 1.10         | ⭐⭐   |
+| AAPL  | 22.28%       | 32.01%            | 0.70         | ⭐     |
 | TSLA  | 45.34%       | 66.82%            | 0.68         | ⭐     |
 | SPY   | 13.68%       | 20.95%            | 0.65         | ⭐     |
 
 **Key Insight**: 
-- NVDA has the best Sharpe (1.10) 
-- TSLA has the most Volatility (66.82)% 
+- NVDA has the best Sharpe (1.10) but still only slightly above 1 
+- has high return but poor Sharpe (0.68) due to extreme volatility (66.82%) 
 - **Better Sharpe = More efficient investment**
 
 ### Visualization
@@ -156,7 +158,7 @@ SPY: Low return, low risk (below diagonal✗)
 TSLA: High return, VERY high risk (below diagonal ✗)
 ```
 
-**Key Insight**: Assets in the top-left are ideal. TSLA is too far right (too risky for its return).
+**Key Insight**: Only NVDA achieves Sharpe > 1. All other assets are below the efficiency threshold.
 
 ---
 
@@ -183,18 +185,18 @@ If assets are highly correlated, they'll all drop together during market crashes
 ### Example Results:
 | Asset Pair | Correlation | Interpretation |
 |-----------|-------------|----------------|
-| SPY-AAPL  | 0.79        | High (both move together often) |
+| SPY-AAPL  | 0.79        | Very High (both move together often) |
 | SPY-NVDA  | 0.71        | High |
-| SPY-TSLA  | 0.54        | Medium (TSLA more independent) |
-| AAPL-NVDA | 0.58        | Medium (both tech stocks) |
-| APPL-TSLA | 0.50        | Medium (best diversification pair) |
-| NVDA-TSLA | 0.48        | Medium
+| AAPL-NVDA | 0.58        | Medium-High (both tech stocks) |
+| SPY-TSLA  | 0.54        | Medium |
+| APPL-TSLA | 0.50        | Medium |
+| NVDA-TSLA | 0.48        | Medium-Low (best diversification pair) |
 ### Heatmap Colors:
-- 🟢 **Dark Green** (0.6-1.0): High correlation
-- 🟡 **Yellow** (0.3-0.6): Medium correlation
-- 🔴 **Red** (<0.3): Low correlation (ideal for diversification)
+- 🟢 **Dark Green** (0.7-1.0): Very High correlation
+- 🟡 **Yellow** (0.4-0.7): Medium correlation
+- 🔴 **Red** (<0.4): Low correlation (ideal for diversification)
 
-**Key Insight**: No perfect diversification pairs (no negative correlations), but TSLA provides some independence from tech stocks.
+**Key Insight**: Moderate correlations overall, with SPY-AAPL being the most correlated pair (0.79). No perfect diversification pairs found.
 
 ---
 
@@ -264,43 +266,43 @@ The **curved upper edge** of the scatter plot showing portfolios that offer:
 #### 🏆 Maximum Sharpe Portfolio (BEST)
 ```
 Composition:
-- SPY:  9,2%
-- AAPL: 79,6%
-- NVDA: 2,1%
-- TSLA: 9,1%
+- SPY:  9.2%
+- AAPL: 79.61%
+- NVDA: 2.13%
+- TSLA: 9.08%
 
 Metrics:
-- Return: 53,206%
-- Volatility: 47,823%
-- Sharpe: 1,113
+- Return: 53.21%
+- Volatility: 47.82%
+- Sharpe: 1.113
 ```
 
 #### 🛡️ Minimum Volatility Portfolio (SAFEST)
 ```
 Composition:
-- SPY:  0,9%
-- AAPL: 0,1%
-- NVDA: 93,3%
-- TSLA: 5,8%
+- SPY:  0.9%
+- AAPL: 0.1%
+- NVDA: 93.3%
+- TSLA: 5.8%
 
 Metrics:
-- Return: 15,615%
-- Volatility: 22,105%
+- Return: 15.62%
+- Volatility: 22.11%
 - Sharpe: 0.706
 ```
 
 #### 🚀 Maximum Return Portfolio (RISKIEST)
 ```
 Composition:
-- SPY:  2,6%
-- AAPL: 95.22%
-- NVDA: 0.2%
-- TSLA: 8.4%
+- SPY:  2.6%
+- AAPL: 95.2%
+- NVDA: 2.0%
+- TSLA: 0.2%
 
 Metrics:
 - Return: 71.2%
 - Volatility: 48.9%
-- Sharpe: 1.46
+- Sharpe: 1.103
 ```
 
 ### How to interpret:
@@ -323,35 +325,35 @@ Metrics:
 - Tests 10,000 random combinations
 - Finds "near-optimal" solution
 - Easy to understand and visualize
-- Result: **Sharpe = 1.518**
+- Result: **Sharpe = 1.113**
 
 #### Mathematical Optimization (scipy):
 - Uses calculus to find EXACT optimal weights
 - Guaranteed to find the true optimum
 - More precise but abstract
-- Result: **Sharpe = 1.523**
+- Result: **Sharpe = 1.115**
 
 ### Comparison Results:
 | Method | Sharpe Ratio | Return | Volatility | Difference |
 |--------|--------------|--------|------------|------------|
-| Monte Carlo | 1.518 | 42.1% | 27.9% | - |
-| Mathematical | 1.523 | 42.3% | 27.8% | +0.3% better |
+| Monte Carlo | 1.113 | 53.21% | 47.82% | - |
+| Mathematical | 1.115 | 56.17% | 50.37% | +0.2% better|
 
 **Key Insight**: Both methods produce very similar results. Monte Carlo is sufficient for practical purposes and easier to understand.
 
 ### Optimal Weights (Mathematical):
 ```
-SPY:  25.34%  ← Index fund for stability
-AAPL: 29.68%  ← Growth + dividends
-NVDA: 34.76%  ← High growth engine
-TSLA: 10.22%  ← Speculative component
+SPY:  2.44%  ← Index fund for stability
+AAPL: 85.12%  ← Growth + dividends
+NVDA: 0.00%  ← High growth engine
+TSLA: 12.44%  ← Speculative component
 ```
 
 ### Why these weights?
-- **NVDA (35%)**: Highest weight because it has excellent Sharpe despite volatility
-- **AAPL (30%)**: Balanced risk-return profile
-- **SPY (25%)**: Provides diversification and stability
-- **TSLA (10%)**: Small allocation due to poor Sharpe (high risk, low efficiency)
+- **NVDA (0%)**: Excluded despite best individual Sharpe - correlation effects make it less valuable in portfolio context
+- **AAPL (85%)**: Dominant weight due to strong risk-adjusted characteristics in combination
+- **SPY (2.44%)**: Minimal diversification benefitMinimal diversification benefit
+- **TSLA (12%)**: Provides growth component despite individual poor Sharpe
 
 ---
 
@@ -360,74 +362,74 @@ TSLA: 10.22%  ← Speculative component
 ### Complete Summary
 
 #### 📊 Assets Analyzed
-**Period**: 2020-01-01 to 2024-11-19  
+**Period**: 2020-01-01 to 2025-11-17  
 **Assets**: SPY, AAPL, NVDA, TSLA  
-**Data points**: 1,220+ trading days
+**Data points**: Extensive daily trading data
 
 #### 📈 Individual Performance
 
 | Asset | Total Return | Annualized Volatility | Sharpe Ratio | Ranking |
 |-------|--------------|----------------------|--------------|---------|
-| NVDA  | +3,400%      | 54.76%               | 1.46         | 🥇 Best Sharpe |
-| AAPL  | +150%        | 34.13%               | 1.12         | 🥈 |
-| SPY   | +150%        | 20.04%               | 0.95         | 🥉 |
-| TSLA  | +450%        | 60.21%               | 0.91         | ⚠️ High risk |
+| NVDA  | +3,100%      | 53.25%               | 1.10         | 🥇 Best Individual |
+| TSLA  | +1300%       | 66.82%               | 0.68         | 🥈 |
+| AAPL  | +300%        | 32.01%               | 0.70         | 🥉 |
+| SPY   | +200%        | 20.95%               | 0.65         | 4th |
 
 #### 🏆 Optimal Portfolio Performance
 
 **Composition**:
-- SPY: 25.34%
-- AAPL: 29.68%
-- NVDA: 34.76%
-- TSLA: 10.22%
+- SPY: 2.44%
+- AAPL: 85.12%
+- NVDA: 0.00%
+- TSLA: 12.44%
 
 **Metrics**:
-- Expected Annual Return: **42.3%**
-- Annual Volatility: **27.8%**
-- Sharpe Ratio: **1.52** ⭐ (beats all individual assets)
+- Expected Annual Return: **56.17%**
+- Annual Volatility: **50.37%**
+- Sharpe Ratio: **1.115** ⭐ (beats all individual assets)
 
-**Risk Reduction**: 35% lower volatility compared to investing 100% in NVDA
+**Risk Reduction**: 5.4% lower volatility compared to investing 100% in NVDA, with similar returns
 
 #### 🎯 Key Findings
 
 1. **Diversification Works**:
-   - Optimal portfolio Sharpe (1.52) > Best individual asset Sharpe (1.46)
-   - 35% risk reduction without sacrificing returns
+   - Optimal portfolio Sharpe (1.115) > Best individual asset Sharpe (1.103)
+   - Better risk-adjusted performance than any single asset
 
-2. **Highest Return ≠ Best Investment**:
-   - NVDA had 3,400% return but isn't the best standalone choice
-   - TSLA had 450% return but worst Sharpe due to excessive volatility
+2. **Surprising Optimal Allocation:**:
+   - Heavy concentration in AAPL (85%) despite moderate individual Sharpe
+   - Complete exclusion of NVDA despite best individual performance
+   - Significant TSLA allocation (12%) despite poor individual Sharpe
+        
+3. **Correlation Effects**:
+   - NVDA's high correlations with other assets reduce its diversification benefit
+   - AAPL provides the best balance of return and diversification benefits
 
-3. **Correlation Matters**:
-   - Assets with 0.38-0.65 correlation provide good (not perfect) diversification
-   - No negative correlations found (stocks tend to move together)
-
-4. **Optimal Allocation**:
-   - Heavy tilt towards NVDA (35%) for growth
-   - Balanced with stable SPY (25%) and AAPL (30%)
-   - Minimal TSLA (10%) due to poor risk-adjusted returns
+4. **Portfolio Math ≠ Individual Performance:**:
+   - Assets with good individual stats don't always make good portfolio components
+   - Correlation structure dramatically impacts optimal weights
 
 #### 💡 Investment Implications
 
 **For a $10,000 investment using optimal portfolio**:
 ```
-SPY:  $2,534  (Stability)
-AAPL: $2,968  (Growth + Income)
-NVDA: $3,476  (High Growth)
-TSLA: $1,022  (Speculation)
+SPY:  $244    (Minimal diversification)
+AAPL: $8,512  (Core holding)
+NVDA: $0      (Excluded despite strong individual performance)
+TSLA: $1,244  (Growth component)
 ```
 
 **Expected outcomes (based on historical data)**:
-- 1-year expected return: **+$4,230** (42.3%)
-- Annual volatility: ±$2,780 (27.8%)
-- Risk-adjusted performance: **Best possible** (Sharpe 1.52)
+- 1-year expected return: +$5,617 (56.17%)
+- Annual volatility: ±$5,037 (50.37%)
+- Risk-adjusted performance: Best possible (Sharpe 1.115)
 
 #### ⚠️ Important Disclaimers
 
 1. **Past performance ≠ Future results**: Historical data doesn't guarantee future returns
-2. **Market conditions change**: 2020-2024 was a strong bull market period
-3. **Rebalancing needed**: Portfolios drift over time and need periodic adjustment
-4. **Transaction costs not included**: Real-world trading has fees and taxes
+2. **Concentrated portfolio**: 85% in single stock carries significant idiosyncratic risk85% in single stock carries significant idiosyncratic risk
+3. **Market conditions change**: 2020-2025 included unusual market conditions
+4. **Transaction costs not included**: Real-world trading has fees and taxesReal-world trading has fees and taxes
 5. **This is educational**: Not financial advice; consult a professional advisor
 
 ---
@@ -440,25 +442,31 @@ TSLA: $1,022  (Speculation)
 2. ✅ **Sharpe Ratio Importance**: Better metric than raw returns for comparing investments
 3. ✅ **Power of Diversification**: Reduces risk without sacrificing returns
 4. ✅ **Efficient Frontier Concept**: Visual representation of optimal portfolios
-5. ✅ **Monte Carlo Methods**: Practical approach to portfolio optimization
-6. ✅ **Mathematical Optimization**: Precise calculation of optimal weights
+5. ✅ **Correlation Impact**: Dramatically affects optimal portfolio composition
+6. ✅ **Portfolio vs Individual Analysis**: Best individual assets ≠ best portfolio components
+
+### Surprising Insights
+1. **NVDA exclusion**: Best individual performer excluded from optimal portfolio due to correlation effects
+2. **AAPL dominance**: Moderate individual performer becomes optimal portfolio core
+3. **Concentration risk**:  Optimal portfolio is highly concentrated (contrary to conventional diversification wisdom)
+
 
 ### Practical Takeaways
 
-- Don't chase the highest returns blindly (TSLA trap)
-- Consider risk-adjusted returns (Sharpe Ratio)
-- Diversify across assets with varying correlations
+- Don't judge assets in isolation - consider how they work together
+- Correlation structure is as important as individual performance
+- Mathematical optimization can produce counter-intuitive but optimal results
 - Regular rebalancing maintains optimal allocation
-- Use data-driven decisions over gut feelings
+- Use data-driven decisions over conventional wisdom
 
 ### Next Steps for Advanced Analysis
 
-1. **Backtesting**: Test optimal portfolio on out-of-sample data
-2. **Rolling optimization**: Recalculate optimal weights quarterly/annually
-3. **Risk metrics**: Add VaR, CVaR, Maximum Drawdown
-4. **Constraints**: Set realistic limits (e.g., max 40% in any single asset)
-5. **Transaction costs**: Model realistic trading expenses
-6. **Tax efficiency**: Consider tax implications of rebalancing
+1. **Constraint optimization**: Add realistic limits (e.g., max 40% in any single asset)
+2. **Sector analysis**: Understand why certain correlations exist
+3. **Rolling optimization**: Recalculate optimal weights quarterly/annually
+4. **Transaction costs**: Model realistic trading expenses
+5. **Tax efficiency**: Consider tax implications of rebalancing
+6. **Out-of-sample testing**: Validate optimal portfolio on new data
 
 ---
 
@@ -471,5 +479,6 @@ TSLA: $1,022  (Speculation)
 
 ---
 
-*Last updated: November 2025*  
+*Last updated: November 2025*
+*Analysis period: 2020-01-01 to 2025-11-17*
 *For questions or suggestions, please open an issue on GitHub*
