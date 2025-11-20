@@ -189,7 +189,7 @@ If assets are highly correlated, they'll all drop together during market crashes
 | SPY-NVDA  | 0.71        | High |
 | AAPL-NVDA | 0.58        | Medium-High (both tech stocks) |
 | SPY-TSLA  | 0.54        | Medium |
-| APPL-TSLA | 0.50        | Medium |
+| AAPL-TSLA | 0.50        | Medium |
 | NVDA-TSLA | 0.48        | Medium-Low (best diversification pair) |
 ### Heatmap Colors:
 - 🟢 **Dark Green** (0.7-1.0): Very High correlation
