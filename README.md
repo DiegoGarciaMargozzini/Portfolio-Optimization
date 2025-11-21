@@ -33,10 +33,10 @@ My first quantitative finance project. I analyze 4 assets (SPY, AAPL, NVDA, TSLA
 ## 📊 Visualizations
 
 ### Efficient Frontier
-![Efficient Frontier](images/efficient_frontier.png)
+![Efficient Frontier](efficient_frontier.png)
 
 ### Optimal Portfolio Composition
-![Portfolio Composition](images/portfolio_composition.png)
+![Portfolio Composition](portfolio_composition.png)
 
 ## 📚 Full Documentation
 
