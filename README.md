@@ -89,7 +89,7 @@ jupyter notebook portfolio_analysis.ipynb
 
 **Diego García Margozzini**  
 First Quantitative Finance Project  
-November 2024
+November 2025
 
 ## 📄 License
 
